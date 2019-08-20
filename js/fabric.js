@@ -14470,6 +14470,15 @@ fabric.util.object.extend(fabric.StaticCanvas.prototype, /** @lends fabric.Stati
       this.set('fill', color);
       return this;
     },
+    setStroke: function(stroke) {
+      this.set('stroke', stroke);
+      return this;
+    },
+    setStrokeWidth: function(strokeWidth) {
+      this.set('strokeWidth', strokeWidth);
+      return this;
+    },
+    
 
     /**
      * Sets "angle" of an instance with centered rotation

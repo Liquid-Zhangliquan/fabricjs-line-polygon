@@ -90,14 +90,14 @@ prototypefabric.polygon = {
         canvas.selection = false;
     },
     generatePolygon: function (pointArray) {
-        canvas.remove(activeShape).remove(activeLine);
+        canvas.remove(activeShape).remove(activeLine)
         var points = new Array();
         $.each(pointArray, function (index, point) {
             points.push({
                 x: point.left,
                 y: point.top
             });
-            point.on('mousedblclick',function(){
+            point.on('mousedblclick', function () {
 
             })
             // canvas.remove(point);
@@ -114,20 +114,25 @@ prototypefabric.polygon = {
             selectable: false,
             hasBorders: false,
             hasControls: false,
-            evented: false
+            evented: true
         });
         canvas.add(_line);
         _line.on('mousedblclick', function (e) {
+            debugger
             console.log(e)
+            me = e.target;
+            me.setStrokeWidth(6)
+            me.setStroke('#FF0000')
+            me.setColor('#FF0000')
         })
-        lineArray.push(_line);
+        lineArray[lineArray.length - 1] = _line;
         $.each(lineArray, function (index, line) {
             // canvas.remove(line);
         });
 
-        // var polygon = new fabric.Polygon(points,{
-        //     stroke:'#333333',
-        //     strokeWidth:0.5,
+        // var polygon = new fabric.Polygon(points, {
+        //     stroke: '#333333',
+        //     strokeWidth: 0.5,
         //     fill: 'red',
         //     opacity: 1,
         //     hasBorders: false,
@@ -135,7 +140,9 @@ prototypefabric.polygon = {
         // });
         // canvas.add(polygon);
 
-        
+        // polygon.on('mousedblclick', function (e) {
+        //     console.log(e)
+        // })
 
         activeLine = null;
         activeShape = null;
