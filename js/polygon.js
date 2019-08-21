@@ -28,7 +28,7 @@ prototypefabric.polygon = {
             })
         }
         var points = [(options.e.layerX / canvas.getZoom()), (options.e.layerY / canvas.getZoom()), (options.e.layerX / canvas.getZoom()), (options.e.layerY / canvas.getZoom())];
-        line = new fabric.Line(points, {
+        var line = new fabric.Line(points, {
             strokeWidth: 2,
             fill: '#999999',
             stroke: '#999999',
@@ -38,11 +38,9 @@ prototypefabric.polygon = {
             selectable: false,
             hasBorders: false,
             hasControls: false,
-            evented: false
+            evented: true,
+            strokeDashArray: [4, 6]
         });
-        line.on('mousedblclick', function (e) {
-            console.log(e)
-        })
         if (activeShape) {
             var pos = canvas.getPointer(options.e);
             var points = activeShape.get("points");
@@ -90,18 +88,18 @@ prototypefabric.polygon = {
         canvas.selection = false;
     },
     generatePolygon: function (pointArray) {
+        // 清除虚polygon和最后一条线
         canvas.remove(activeShape).remove(activeLine)
         var points = new Array();
+        // 清除所有节点
         $.each(pointArray, function (index, point) {
             points.push({
                 x: point.left,
                 y: point.top
             });
-            point.on('mousedblclick', function () {
-
-            })
-            // canvas.remove(point);
+            canvas.remove(point);
         });
+        // 手动绘制最后一条线
         var len = points.length;
         var _points = [points[len - 1].x, points[len - 1].y, points[0].x, points[0].y]
         var _line = new fabric.Line(_points, {
@@ -114,20 +112,17 @@ prototypefabric.polygon = {
             selectable: false,
             hasBorders: false,
             hasControls: false,
-            evented: true
+            evented: true,
+            strokeDashArray: [4, 6]
         });
         canvas.add(_line);
-        _line.on('mousedblclick', function (e) {
-            debugger
-            console.log(e)
-            me = e.target;
-            me.setStrokeWidth(6)
-            me.setStroke('#FF0000')
-            me.setColor('#FF0000')
-        })
         lineArray[lineArray.length - 1] = _line;
-        $.each(lineArray, function (index, line) {
-            // canvas.remove(line);
+        // 遍历每条线 添加事件
+        $.each(lineArray, function (index, item) {
+            // 选中高亮
+            // item.on('mouseover', linePop)
+            // 双击弹窗
+            item.on('mousedblclick', linePop)
         });
 
         // var polygon = new fabric.Polygon(points, {

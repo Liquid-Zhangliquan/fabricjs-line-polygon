@@ -1,0 +1,70 @@
+body,html{
+    width:100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+.top-content{
+    background-color: #212121;
+    height: 50px;
+}
+.container{
+    margin: 0 300px 0 300px;
+    height: 100%
+}
+.left-title{
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    color: #ffffff;
+    font-size: 24px;
+}
+.right-title{
+    float: right;
+    height: 50px;
+    line-height: 50px;
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
+}
+.form-item{
+    float: left;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    margin-top: 10px;
+}
+.form-label{
+    float: left;
+    width: 70px;
+}
+.form-input{
+    float: left;
+    margin: 0 0 0 10px !important;
+    height: 24px !important;
+    width: 150px !important;
+}
+.form-radio{
+    float: left;
+    margin: 0 0 0 10px !important;
+    height: 24px !important;
+    width: 24px !important;
+}
+.form-item>p{
+ height: 24px;
+ line-height: 24px;
+ float: left;
+ margin: 0 0 0 10px;
+}
+.jscolor{
+    float: left;
+    margin: 0 0 0 10px !important;
+    height: 24px !important;
+    width: 150px !important;
+}
+#line_color{
+    margin-left: 10px;
+}
+.line-pop{
+    /* display: none; */
+}
