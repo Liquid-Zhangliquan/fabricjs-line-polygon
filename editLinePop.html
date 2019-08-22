@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>pop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="js/layerjs/theme/default/layer.css">
+    <style>
+        .form-item {
+            float: left;
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            margin-top: 10px;
+        }
+
+        .form-label {
+            float: left;
+            width: 70px;
+        }
+
+        .form-input {
+            float: left;
+            margin: 0 0 0 10px !important;
+            height: 24px !important;
+            width: 150px !important;
+        }
+
+        .form-radio {
+            float: left;
+            margin: 0 0 0 10px !important;
+            height: 24px !important;
+            width: 24px !important;
+        }
+
+        .form-item>p {
+            height: 24px;
+            line-height: 24px;
+            float: left;
+            margin: 0 0 0 10px;
+        }
+
+        .jscolor {
+            float: left;
+            margin: 0 0 0 10px !important;
+            height: 30px !important;
+            width: 155px !important;
+            line-height: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="line-pop">
+        <div class="form-item">
+            <div class="form-label">宽度</div>
+            <input class="form-input" type="text" id="line_width" value="2">
+        </div>
+        <div class="form-item">
+            <div class="form-label">颜色</div>
+            <button class="jscolor" id="line_color"></button>
+        </div>
+        <div class="form-item">
+            <div class="form-label">线形</div>
+            <input class="form-radio" name="shape" type="radio" checked value="linestring">
+            <p>直线</p>
+            <input class="form-radio" name="shape" type="radio" value="dottedling">
+            <p>虚线</p>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/jscolor.js"></script>
+<script type="text/javascript" src="js/layerjs/layer.js"></script>
+<script>
+    function getOption() {
+        var width = $('#line_width').val();
+        var color = '#' + $('#line_color').text()
+        var IsDottedLine = 'linestring';
+        var radios = document.getElementsByName('shape');
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked) {
+                IsDottedLine = radios[i].value;
+            }
+        }
+        var option = {
+            color: color,
+            width: width,
+            IsDottedLine: IsDottedLine
+        }
+        return option
+    }
+</script>
+
+</html>

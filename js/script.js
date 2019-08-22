@@ -51,89 +51,41 @@ var prototypefabric = new function () {
     };
 };
 
+var LineHld = function (e) {
+    canvas.hoverCursor = 'pointer';
+}
 
-var linePop = function (e) {
-    // var content = getContent(e);
-    // var layerhandle = layer.open({
-    //     title: '修改线段样式',
-    //     content: $('.line-pop'),
-    //     btn: ["应用", "取消"],
-    //     btn1: function (index, layero) {
-    //         lineEdit(e)
-    //         layer.close(layerhandle)
-    //     },
-    //     btn2: function (index, layero) {
-    //         layer.close(layerhandle)
-    //     },
-    //     canvel: function (index, layero) {
-    //         layer.close(layerhandle)
-    //     },
-    // })
-    if (!task) {
-        var layerhandle = layer.open({
-            title: '修改线段样式',
-            content: $('.line-pop'),
-            btn: ["应用", "取消"],
-            btn1: function (index, layero) {
-                lineEdit(e)
-                layer.close(layerhandle)
-            },
-            btn2: function (index, layero) {
-                layer.close(layerhandle)
-            },
-            canvel: function (index, layero) {
-                layer.close(layerhandle)
-            },
-        })
-        task = 1
-    } else {
-        var layerhandle = layer.open({
-            type: 1,
-            title: '修改线段样式',
-            content: $('.line-pop'),
-            btn: ["应用", "取消"],
-            btn1: function (index, layero) {
-                lineEdit(e)
-                layer.close(layerhandle)
-            },
-            btn2: function (index, layero) {
-                layer.close(layerhandle)
-            },
-            canvel: function (index, layero) {
-                layer.close(layerhandle)
-            },
-        })
-    }
+var RemoveLineHld = function (e) {
 
 }
 
-function getContent(e) {
-    var _line = e.target;
-    var color = _line.fill;
-    var width = _line.strokeWidth;
-    var jscolor = "jscolor {valueElement:null,value:'" + color + "'}";
-    var content = '<div>'
-    content += '<div class="form-item">'
-    content += '<div class="form-label">宽度</div>'
-    content += '<input class="form-input" type="text" id="line_width" value="' + width + '">'
-    content += '</div>'
-    content += '<div class="form-item">'
-    content += '<div class="form-label">颜色</div>'
-    content += '<button class="' + jscolor + '" id="line_color"></button>'
-    content += '</div>'
-    content += '<div class="form-item">'
-    content += '<div class="form-label">线形</div>'
-    content += '<input class="form-radio" type="radio" name="shape" value="直线"><p>直线</p><input class="form-radio" name="shape"  type="radio" value="虚线"><p>虚线</p>'
-    content += '</div>'
-    content += '</div>'
-    return content
+
+var LinePop = function (e) {
+    var layerhandle = layer.open({
+        type: 2,
+        title: '修改线段样式',
+        content: 'editLinePop.html',
+        btn: ["应用", "取消"],
+        btn1: function (index, layero) {
+            var body = layer.getChildFrame('body', index);//通过该对象可以获取iframe中的dom元素
+            var w = $(layero).find("iframe")[0].contentWindow;//通过该对象可以获取iframe中的变量，调用iframe中的方法
+            var opt = w.getOption();//调用iframe中的方法
+            lineEdit(e, opt)
+            layer.close(layerhandle)
+        },
+        btn2: function (index, layero) {
+            layer.close(layerhandle)
+        },
+        canvel: function (index, layero) {
+            layer.close(layerhandle)
+        },
+    })
 }
 
-function lineEdit(e) {
+function lineEdit(e, opt) {
     var _line = e.target;
-    var width = $('#line_width').val();
-    var color = $('#line_color')[0].style.backgroundColor;
-    _line.strokeWidth = width;
-    _line.fill = color;
-    canvas.renderAll()
+    _line.setColor(opt.color);
+    _line.setStroke(opt.color);
+    _line.setStrokeWidth(opt.width);
+    opt.IsDottedLine === "dottedling" ? _line.setStrokeDashArray([4, 6]) : _line.setStrokeDashArray([0, 0]);
 }

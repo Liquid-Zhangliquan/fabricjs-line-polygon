@@ -14478,6 +14478,10 @@ fabric.util.object.extend(fabric.StaticCanvas.prototype, /** @lends fabric.Stati
       this.set('strokeWidth', strokeWidth);
       return this;
     },
+    setStrokeDashArray: function(strokeDashArray) {
+      this.set('strokeDashArray', strokeDashArray);
+      return this;
+    },
     
 
     /**

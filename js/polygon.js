@@ -38,8 +38,7 @@ prototypefabric.polygon = {
             selectable: false,
             hasBorders: false,
             hasControls: false,
-            evented: true,
-            strokeDashArray: [4, 6]
+            evented: true
         });
         if (activeShape) {
             var pos = canvas.getPointer(options.e);
@@ -112,32 +111,23 @@ prototypefabric.polygon = {
             selectable: false,
             hasBorders: false,
             hasControls: false,
-            evented: true,
-            strokeDashArray: [4, 6]
+            evented: true
         });
         canvas.add(_line);
         lineArray[lineArray.length - 1] = _line;
         // 遍历每条线 添加事件
         $.each(lineArray, function (index, item) {
-            // 选中高亮
-            // item.on('mouseover', linePop)
+            // 首次添加line，然后添加鼠标事件会失效，采取全部移除再添加暂时解决
+            canvas.remove(item)
+            canvas.add(item)
+            // hover高亮
+            item.on('mousemove', LineHld)
+            // 移出取消高亮
+            item.on('mouseout', RemoveLineHld)
             // 双击弹窗
-            item.on('mousedblclick', linePop)
+            item.on('mousedblclick', LinePop)
         });
 
-        // var polygon = new fabric.Polygon(points, {
-        //     stroke: '#333333',
-        //     strokeWidth: 0.5,
-        //     fill: 'red',
-        //     opacity: 1,
-        //     hasBorders: false,
-        //     hasControls: false
-        // });
-        // canvas.add(polygon);
-
-        // polygon.on('mousedblclick', function (e) {
-        //     console.log(e)
-        // })
 
         activeLine = null;
         activeShape = null;
