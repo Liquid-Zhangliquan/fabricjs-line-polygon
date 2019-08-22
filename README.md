@@ -5,7 +5,7 @@ Draw polygon using mouse in fabricjs
 https://github.com/taqimustafa/fabricjs-polygon
 
 # live demo:
-(hear)[http://Liquid-Zhangliquan.github.io/fabricjs-line-polygon]
+[hear](http://Liquid-Zhangliquan.github.io/fabricjs-line-polygon)
 
 ## 扩展fabricjs
 在原来的基础上扩展了
